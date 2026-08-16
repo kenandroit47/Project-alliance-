@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HUE Studio v0.1</title>
+<style>
+:root{--bg:#071018;--panel:#0d1b26;--line:#1d3545;--text:#edf7ff;--muted:#91a8b8;--accent:#7de3ff;--ok:#79e28d;--warn:#ffd76a;--purple:#c48cff;--blue:#63b7ff;--red:#ff7777}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top,#102638,#071018 55%);color:var(--text);font:15px system-ui,-apple-system,Segoe UI,sans-serif}main{max-width:1100px;margin:auto;padding:28px}.top{display:flex;justify-content:space-between;gap:16px;align-items:center}.eyebrow{color:var(--accent);letter-spacing:.16em;font-size:12px}.status{padding:8px 12px;border:1px solid var(--line);border-radius:999px;color:var(--muted)}h1{font-size:clamp(34px,6vw,64px);margin:5px 0}h2{margin:0 0 10px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:20px}.card{background:rgba(13,27,38,.9);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 12px 30px #0004}.bus{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.pill{padding:8px 10px;border:1px solid var(--line);border-radius:10px;color:var(--muted)}button{border:1px solid var(--line);background:#112a39;color:var(--text);padding:10px 13px;border-radius:10px;cursor:pointer;margin:4px}button:hover{border-color:var(--accent)}input,select{width:100%;padding:11px;border-radius:10px;border:1px solid var(--line);background:#08151f;color:var(--text);margin:6px 0 10px}.meter{height:10px;background:#071018;border-radius:20px;overflow:hidden}.fill{height:100%;background:linear-gradient(90deg,var(--blue),var(--purple),var(--ok));width:0;transition:.25s}.log{height:210px;overflow:auto;background:#050c12;border:1px solid var(--line);border-radius:12px;padding:10px;font-family:ui-monospace,monospace;font-size:12px}.event{padding:7px 0;border-bottom:1px solid #17303e}.small{font-size:12px;color:var(--muted)}.danger{color:var(--red)}.ok{color:var(--ok)}.purple{color:var(--purple)}.blue{color:var(--blue)}.yellow{color:var(--warn)}footer{padding:30px 0;color:var(--muted);font-size:12px}
+</style>
+</head>
+<body>
+<main>
+  <div class="top"><div><div class="eyebrow">K.F.O / HUE INTELLIGENCE</div><h1>HUE Studio</h1><div class="small">Multimodal signal bus · live iteration · creative transformation</div></div><div id="session" class="status">STANDBY</div></div>
+
+  <div class="card" style="margin-top:20px">
+    <h2>UI/UX Wake Layer</h2>
+    <div class="small">Prototype activation. Production voice authentication must be supplied by the host/device security layer.</div>
+    <input id="wake" placeholder='Type: UI/UX' autocomplete="off">
+    <button onclick="wake()">Activate</button>
+    <button onclick="lockSession()">Lock</button>
+  </div>
+
+  <div class="grid">
+    <section class="card"><h2>HUE Signal Bus</h2><div class="bus"><span class="pill">VOICE</span><span class="pill">MIC</span><span class="pill">GESTURE</span><span class="pill">LIGHTER</span><span class="pill">LED</span><span class="pill">MIDI</span><span class="pill">NETWORK</span></div><p class="small">All controls become normalized HUE events before orchestration.</p></section>
+    <section class="card"><h2>Fast-Groove Engine</h2><label>BPM <strong id="bpmVal">132</strong></label><input id="bpm" type="range" min="80" max="190" value="132" oninput="bpmVal.textContent=this.value;emit('tempo','BPM '+this.value)"><div class="meter"><div id="energy" class="fill"></div></div><p class="small">Default: up-tempo / fast-feeling. Human timing variation remains eligible for preservation.</p></section>
+    <section class="card"><h2>HUE-AFFECT</h2><label>Affective intensity</label><input id="affect" type="range" min="0" max="100" value="65" oninput="emit('affect','intensity '+this.value+'%')"><p id="affectText" class="small">Functional estimate only; inference is not treated as fact.</p></section>
+  </div>
+
+  <div class="card" style="margin-top:16px"><h2>Color / Click Controller</h2><div><button onclick="colorEvent('BLUE')" class="blue">BLUE — live performance</button><button onclick="colorEvent('PURPLE')" class="purple">PURPLE — variation</button><button onclick="colorEvent('RED')" class="danger">RED — correction</button><button onclick="colorEvent('GREEN')" class="ok">GREEN — approve / lock</button><button onclick="click4()" class="yellow">4 CLICKS — fork</button></div><p class="small">Prototype only: physical lighter/LED enrollment and device authentication are not bypassed by these UI buttons.</p></div>
+
+  <div class="grid">
+    <section class="card"><h2>Media Sandbox</h2><div class="small">Reference media is treated as input to an independent creative branch; the source remains untouched.</div><input id="mediaUrl" placeholder="Paste a permitted YouTube/reference URL"><select id="branch"><option>Faster groove</option><option>Alternate genre</option><option>Heavier groove</option><option>Sparser arrangement</option><option>Melodic reinterpretation</option></select><button onclick="sandbox()">Fork reference</button><div id="sandboxState" class="small"></div></section>
+    <section class="card"><h2>Creative Evaluation</h2><div class="bus"><span class="pill">Intent</span><span class="pill">Identity</span><span class="pill">Groove</span><span class="pill">Melody</span><span class="pill">Humanity</span><span class="pill">Contrast</span><span class="pill">Spontaneity</span><span class="pill">Twist</span><span class="pill">Mix</span><span class="pill">Emotional payoff</span></div><p class="small">Rule: correct what obstructs the music; preserve what gives it life.</p></section>
+  </div>
+
+  <section class="card" style="margin-top:16px"><h2>Live Event Log</h2><div id="log" class="log"></div></section>
+  <footer>HUE Studio v0.1 · Project Alliance · Prototype orchestration layer. No credentials or secrets are stored by this page.</footer>
+</main>
+<script>
+const logEl=document.getElementById('log'),sessionEl=document.getElementById('session');
+function log(type,msg){const d=new Date().toLocaleTimeString();logEl.innerHTML=`<div class="event"><b>${d}</b> · ${type} · ${msg}</div>`+logEl.innerHTML}
+function emit(type,msg){log(type,msg);document.getElementById('energy').style.width=Math.min(100,25+Math.random()*75)+'%'}
+function wake(){const v=document.getElementById('wake').value.trim().toUpperCase();if(v==='UI/UX'){sessionEl.textContent='HUE ACTIVE';sessionEl.style.color='var(--ok)';emit('WAKE','UI/UX accepted; host authentication required for privileged actions')}else emit('WAKE','unrecognized phrase')}
+function lockSession(){sessionEl.textContent='STANDBY';sessionEl.style.color='var(--muted)';emit('SESSION','locked')}
+function colorEvent(c){emit(c,c==='BLUE'?'live human performance':c==='PURPLE'?'variation / branching':c==='RED'?'correction / regeneration':'approve / lock')}
+function click4(){emit('PURPLE×4','current state fork requested');document.getElementById('sandboxState').textContent='Fork queued: A faster · B alternate genre · C heavier groove'}
+function sandbox(){const u=document.getElementById('mediaUrl').value.trim(),b=document.getElementById('branch').value;if(!u){emit('SANDBOX','reference URL required');return}document.getElementById('sandboxState').textContent='Reference captured for creative analysis: '+b;emit('SANDBOX',b+' from reference '+u)}
+log('SYSTEM','HUE Signal Bus initialized');
+</script>
+</body>
+</html>
