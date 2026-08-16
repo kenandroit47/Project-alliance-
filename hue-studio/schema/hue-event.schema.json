@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://project-alliance.vercel.app/hue-studio/schema/hue-event.schema.json",
+  "title": "HUE Event",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["event_id", "timestamp", "source", "device_id", "signal", "payload", "confidence", "session_id", "authorization"],
+  "properties": {
+    "event_id": {"type": "string", "minLength": 1},
+    "timestamp": {"type": "string", "format": "date-time"},
+    "source": {"type": "string", "enum": ["voice", "microphone", "gesture", "lighter", "led", "midi", "network", "ui", "media"]},
+    "device_id": {"type": "string", "minLength": 1},
+    "signal": {"type": "string", "minLength": 1},
+    "payload": {},
+    "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+    "session_id": {"type": "string", "minLength": 1},
+    "authorization": {"type": "string", "enum": ["unauthenticated", "authenticated", "privileged"]}
+  }
+}
