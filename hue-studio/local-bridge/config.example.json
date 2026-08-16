@@ -1,0 +1,29 @@
+{
+  "host": "127.0.0.1",
+  "port": 48731,
+  "session": {
+    "requireAuthentication": true,
+    "idleTimeoutSeconds": 900
+  },
+  "devices": {
+    "denyByDefault": true,
+    "enrolled": []
+  },
+  "capabilities": {
+    "audioInput": false,
+    "midi": false,
+    "osc": false,
+    "daw": false,
+    "voiceAuth": false,
+    "lighterController": false,
+    "networkDevices": false,
+    "mediaSandbox": true
+  },
+  "limits": {
+    "maxEventsPerSecond": 30,
+    "maxPayloadBytes": 65536
+  },
+  "logging": {
+    "auditPrivilegedEvents": true
+  }
+}
